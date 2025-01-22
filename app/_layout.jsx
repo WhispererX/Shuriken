@@ -7,27 +7,27 @@ import { getUserData } from '../services/userService';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
-SplashScreen.preventAutoHideAsync();
+//SplashScreen.preventAutoHideAsync();
 
 /**
  * Root layout component that wraps the app in an `AuthProvider` context.
  * This ensures authentication-related functionality is accessible across the app.
  */
 const _layout = () => {
-  const [loaded, error] = useFonts({
-    'Jaro': require('../assets/fonts/JaroStatic.ttf'),
-  });
+  // const [loaded, error] = useFonts({
+  //   'Jaro': require('../assets/fonts/JaroStatic.ttf'),
+  // });
 
-  useEffect(() => {
-    if (loaded || error) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded, error]);
+  // useEffect(() => {
+  //   if (loaded || error) {
+  //     SplashScreen.hideAsync();
+  //   }
+  // }, [loaded, error]);
 
 
-  if (!loaded && !error) {
-    return null;
-  }
+  // if (!loaded && !error) {
+  //   return null;
+  // }
   return (
     <AuthProvider>
       <MainLayout />

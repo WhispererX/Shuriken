@@ -10,6 +10,7 @@ import { getHeightPercentage } from '../helpers/common'
 import { theme } from '../constants/theme'
 import Input from '../components/input'
 import Button from '../components/Button'
+import { supabase } from '../lib/superbase'
 
 const Register = () => {
   const router = useRouter();
@@ -19,9 +20,30 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async () => {
-    if (!emailRef.current.value || !passwordRef.current.value) {
+    if (!emailRef.current || !passwordRef.current || !nameRef.current) {
       Alert.alert('Sign Up','Please fill in all the fields');
       return;
+    }
+
+    let name = nameRef.current.trim();
+    let email = emailRef.current.trim();
+    let password = passwordRef.current.trim();
+
+    setLoading(true);
+
+    const {data: {session}, error} = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          name
+        }
+      }
+    });
+    setLoading(false);
+
+    if (error) {
+      Alert.alert('Sign Up',error.message);
     }
   }
 

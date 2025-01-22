@@ -4,12 +4,30 @@ import { Stack, useRouter } from 'expo-router';
 import { AuthProvider, useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/superbase';
 import { getUserData } from '../services/userService';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+
+SplashScreen.preventAutoHideAsync();
 
 /**
  * Root layout component that wraps the app in an `AuthProvider` context.
  * This ensures authentication-related functionality is accessible across the app.
  */
 const _layout = () => {
+  const [loaded, error] = useFonts({
+    'Jaro': require('../assets/fonts/JaroStatic.ttf'),
+  });
+
+  useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
+
+
+  if (!loaded && !error) {
+    return null;
+  }
   return (
     <AuthProvider>
       <MainLayout />
@@ -62,6 +80,7 @@ const MainLayout = () => {
     // If the fetch is successful, update the user data in the Auth context
     if (res.success) setUserData(res.data);
   };
+
 
   // Render the navigation stack with no headers shown
   return (

@@ -22,6 +22,7 @@ import ThreeDotsCircleIcon from './threeDotsCircle'
 import ThreeDotsHorizontalIcon from './threeDotsHorizontal'
 import UserIcon from './user'
 import VideoIcon from './video'
+import NotificationIcon from './notification';
 
 const icons = {
   arrowLeft: ArrowLeftIcon,
@@ -45,6 +46,7 @@ const icons = {
   threeDotsHorizontal: ThreeDotsHorizontalIcon,
   user: UserIcon,
   video: VideoIcon,
+  notification: NotificationIcon,
 }
 
 const Icon = ({name, ...props}) => {

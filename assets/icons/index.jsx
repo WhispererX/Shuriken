@@ -1,4 +1,3 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { theme } from '../../constants/theme';
 
@@ -62,5 +61,3 @@ const Icon = ({name, ...props}) => {
 }
 
 export default Icon
-
-const styles = StyleSheet.create({})

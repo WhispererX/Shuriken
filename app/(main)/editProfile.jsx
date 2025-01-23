@@ -21,7 +21,6 @@ const EditProfile = () => {
 
     const [user, setUser] = useState({
         name: '',
-        phoneNumber: '',
         image: null,
         bio: '',
         address: ''
@@ -31,7 +30,6 @@ const EditProfile = () => {
         if (currentUser) {
             setUser({
                 name: currentUser.name || '',
-                phoneNumber: currentUser.phoneNumber || '',
                 image: currentUser.image || null,
                 address: currentUser.address || '',
                 bio: currentUser.bio || ''
@@ -53,8 +51,8 @@ const EditProfile = () => {
     }
     const onSubmit = async()=> {
         let userData = {...user};
-        let {name, phoneNumber, address, image, bio} = userData;
-        if (!name || !phoneNumber || !address || !bio || !image) {
+        let {name, address, image, bio} = userData;
+        if (!name || !address || !bio || !image) {
             Alert.alert('Profile', 'Please fill in all the fields');
             return;
         }
@@ -99,14 +97,6 @@ const EditProfile = () => {
                         placeholder="Enter your name"
                         value={user.name}
                         onChangeText={value => setUser({...user, name: value})}
-                    />
-
-                    {/* Phone Number */}
-                    <Input
-                        icon={<Icon name="call" />}
-                        placeholder="Enter your phone number"
-                        value={user.phoneNumber}
-                        onChangeText={value => setUser({...user, phoneNumber: value})}
                     />
 
                     {/* Address */}

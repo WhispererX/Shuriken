@@ -81,14 +81,7 @@ const UserHeader = ({user, router, handleLogout}) => {
               <Icon name="email" size={20} color={theme.colors.textLight}/>
               <Text style={styles.infoText}>{user && user.email}</Text>
             </View>
-            {
-              user && user.phoneNumber && (
-                <View style={styles.info}>
-                  <Icon name="call" size={20} color={theme.colors.textLight}/>
-                  <Text style={styles.infoText}>{user && user.phoneNumber}</Text>
-                </View>
-              )
-            }
+            
             {/* User Bio */}
             {
               user && user.bio && (
@@ -155,6 +148,7 @@ const styles = StyleSheet.create({
     fontSize: getHeightPercentage(1.6),
     fontWeight: '500',
     color: theme.colors.textLight,
+    //textAlign: 'center'
   },
 
   logoutButton: {

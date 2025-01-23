@@ -1,4 +1,5 @@
 import { Dimensions } from "react-native";
+import { decode } from "html-entities";
 
 // Get the width and height of the device's screen
 const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
@@ -19,4 +20,14 @@ export const getHeightPercentage = (percentage) => {
  */
 export const getWidthPercentage = (percentage) => {
   return (percentage * screenWidth) / 100;
+};
+
+export const stripHtmlTags = (html) => {
+  if (!html || typeof html !== "string") return "";
+
+  // Remove HTML tags
+  const stripped = html.replace(/<[^>]*>?/gm, "");
+
+  // Decode HTML entities (e.g., &amp; -> &, &lt; -> <)
+  return decode(stripped);
 };

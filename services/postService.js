@@ -41,7 +41,8 @@ export const fetchPosts = async (limit = 10) => {
       .select(
         `
         *,
-        user: users (id, name, image)
+        user: users (id, name, image),
+        postLikes (*)
         `
       )
       .order("created_at", { ascending: false })
@@ -56,5 +57,45 @@ export const fetchPosts = async (limit = 10) => {
   } catch (error) {
     console.log("[Fetch Post Error]: ", error);
     return { success: false, msg: "Could not fetch posts" };
+  }
+};
+
+export const createPostLike = async (postLike) => {
+  try {
+    const { data, error } = await supabase
+      .from("postLikes")
+      .insert(postLike)
+      .select()
+      .single();
+
+    if (error) {
+      console.log("[Like Post Error]: ", error);
+      return { success: false, msg: "Could not like the post" };
+    }
+
+    return { success: true, data: data };
+  } catch (error) {
+    console.log("[Like Post Error]: ", error);
+    return { success: false, msg: "Could not like the post" };
+  }
+};
+
+export const removePostLike = async (postId, userId) => {
+  try {
+    const { error } = await supabase
+      .from("postLikes")
+      .delete()
+      .eq("userId", userId)
+      .eq("postId", postId);
+
+    if (error) {
+      console.log("[Dislike Post Error]: ", error);
+      return { success: false, msg: "Could not dislike the post" };
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.log("[Dislike Post Error]: ", error);
+    return { success: false, msg: "Could not dislike the post" };
   }
 };

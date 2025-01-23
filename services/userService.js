@@ -31,3 +31,28 @@ export const getUserData = async (userId) => {
     return { success: false, msg: error.message }; // Return the error message
   }
 };
+
+export const updateUser = async (userId, data) => {
+  try {
+    // Query the "users" table in Supabase to fetch data for the given user ID
+    const { error } = await supabase
+      .from("users")
+      .update(data)
+      .eq("id", userId); // Target the "users" table
+
+    // Check if there was an error in the query
+    if (error) {
+      return { success: false, msg: error?.message }; // Return the error message
+    }
+
+    // Return success and the retrieved data
+    return { success: true, data };
+  } catch (error) {
+    // Handle unexpected errors during the fetch operation
+    console.log(
+      "[Whisper Error] Error getting user Data in userService.js",
+      error
+    );
+    return { success: false, msg: error.message }; // Return the error message
+  }
+};

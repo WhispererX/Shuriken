@@ -55,7 +55,7 @@ const MainLayout = () => {
         setAuth(session?.user);
 
         // Fetch and update additional user data
-        updateUserData(session?.user);
+        updateUserData(session?.user, session?.user?.email);
 
         // Navigate to the home screen
         router.replace('/home');
@@ -73,12 +73,12 @@ const MainLayout = () => {
    * Fetch and update user data based on their ID.
    * @param {Object} user - The authenticated user's data.
    */
-  const updateUserData = async (user) => {
+  const updateUserData = async (user, email) => {
     // Call the service to fetch user data
     let res = await getUserData(user?.id);
 
     // If the fetch is successful, update the user data in the Auth context
-    if (res.success) setUserData(res.data);
+    if (res.success) setUserData({...res.data, email});
   };
 
 

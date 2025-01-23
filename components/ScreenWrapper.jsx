@@ -17,7 +17,7 @@ const ScreenWrapper = ({ children, background }) => {
 
   // Calculate padding for the top of the screen
   // If the top inset is greater than 0, add 5 for extra spacing; otherwise, default to 30
-  const paddingTop = top > 0 ? top + 5 : 30;
+  const paddingTop = top > 0 ? top + 5 : 10;
 
   return (
     <View style={{ flex: 1, paddingTop, backgroundColor: background }}>

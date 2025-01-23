@@ -15,19 +15,19 @@ const Home = () => {
     const {user, setAuth} = useAuth();
     const router = useRouter();
 
-    const onLogout = async () => {
-        //setAuth(null);
-        const {error} = await supabase.auth.signOut();
-        if (error) {
-            Alert.alert('Logout', 'Error logging out');
-        }
-    }
+    // const onLogout = async () => {
+    //     //setAuth(null);
+    //     const {error} = await supabase.auth.signOut();
+    //     if (error) {
+    //         Alert.alert('Logout', 'Error logging out');
+    //     }
+    // }
   return (
     <ScreenWrapper background='white'>
       <View style={styles.container}>
         {/* Header */}
         <View style={styles.header}>
-              <Image source={require('../../assets/images/shuriken.gif')} style={styles.logoImage}/>
+              
               <Text style={styles.title}>Shuriken</Text>
               <View style={styles.icons}>
                   <Pressable onPress={()=> router.push('notifications')}>
@@ -47,7 +47,7 @@ const Home = () => {
               </View>
         </View>
       </View>
-      <Button title='Logout' onPress={onLogout}/>
+      {/* <Button title='Logout' onPress={onLogout}/> */}
     </ScreenWrapper>
   )
 }
@@ -72,12 +72,6 @@ const styles = StyleSheet.create({
     fontSize: getHeightPercentage(3.2),
     fontWeight: theme.fontWeight.bold,
     marginRight: 'auto',
-    fontFamily: 'Jaro',
-  },
-
-  logoImage: {
-    height: getHeightPercentage(8),
-    width: getHeightPercentage(8),
   },
 
   avatarImage: {

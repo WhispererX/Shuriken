@@ -42,7 +42,8 @@ export const fetchPosts = async (limit = 10) => {
         `
         *,
         user: users (id, name, image),
-        postLikes (*)
+        postLikes (*),
+        comments (count)
         `
       )
       .order("created_at", { ascending: false })
@@ -97,5 +98,72 @@ export const removePostLike = async (postId, userId) => {
   } catch (error) {
     console.log("[Dislike Post Error]: ", error);
     return { success: false, msg: "Could not dislike the post" };
+  }
+};
+
+export const fetchPostDetails = async (postId) => {
+  try {
+    const { data, error } = await supabase
+      .from("posts")
+      .select(
+        `
+        *,
+        user: users (id, name, image),
+        postLikes (*),
+        comments (*, user: users(id, name, image))
+        `
+      )
+      .eq("id", postId)
+      .order("created_at", { ascending: false, foreignTable: "comments" })
+      .single();
+
+    if (error) {
+      console.log("[Fetch Post Details Error]: ", error);
+      return { success: false, msg: "Could not fetch the post" };
+    }
+
+    return { success: true, data: data };
+  } catch (error) {
+    console.log("[Fetch Post Details Error]: ", error);
+    return { success: false, msg: "Could not fetch the post" };
+  }
+};
+
+export const createComment = async (comment) => {
+  try {
+    const { data, error } = await supabase
+      .from("comments")
+      .insert(comment)
+      .select()
+      .single();
+
+    if (error) {
+      console.log("[Comment Error]: ", error);
+      return { success: false, msg: "Could not create comment" };
+    }
+
+    return { success: true, data: data };
+  } catch (error) {
+    console.log("[Comment Error]: ", error);
+    return { success: false, msg: "Could not create comment" };
+  }
+};
+
+export const removeComment = async (commentId) => {
+  try {
+    const { error } = await supabase
+      .from("comments")
+      .delete()
+      .eq("id", commentId);
+
+    if (error) {
+      console.log("[Remove Comment Error]: ", error);
+      return { success: false, msg: "Could not remove comment" };
+    }
+
+    return { success: true, data: { commentId } };
+  } catch (error) {
+    console.log("[Remove Comment Error]: ", error);
+    return { success: false, msg: "Could not remove comment" };
   }
 };

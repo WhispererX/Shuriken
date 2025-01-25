@@ -1,50 +1,102 @@
-# Welcome to your Expo app 👋
+# Shuriken
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Shuriken is a social media mobile application developed using React Native and Expo. It provides users with essential social networking features in a sleek and user-friendly interface, empowering them to connect, share, and engage effortlessly.
 
-## Get started
+---
 
-1. Install dependencies
+## Features
+
+### Posts and Comments
+
+- **Create Posts**: Users can craft posts using a rich text editor, enabling them to add styles, links, and more.
+- **Edit Posts**: Modify existing posts to ensure content stays up to date.
+- **Delete Posts**: Remove posts that are no longer relevant.
+- **Post Media**: Upload images and videos to accompany posts, enhancing their visual appeal.
+- **Comments**: Engage with posts through comments, with the ability to create, edit, and delete comments.
+
+### Interactions
+
+- **Like Posts**: Show appreciation for posts by liking them.
+- **Share Posts**: Share content with others directly from the app.
+
+### Notifications
+
+- Receive notifications for likes, shares, comments, and other key interactions.
+
+### Profile Management
+
+- **Edit Profile**: Customize profile information such as name, bio, and profile picture.
+
+---
+
+## Technology Stack
+
+- **Framework**: React Native
+- **Platform**: Expo
+
+---
+
+## Installation
+
+Follow these steps to set up and run the Shuriken app locally:
+
+1. **Clone the Repository**:
+
+   ```bash
+   git clone https://github.com/WhispererX/Shuriken.git
+   cd shuriken
+   ```
+
+2. **Install Dependencies**:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+3. **Run the App**:
 
    ```bash
-    npx expo start
+   expo start
    ```
 
-In the output, you'll find options to open the app in a
+4. **Test on a Device or Emulator**:
+   - Scan the QR code displayed in the terminal or Expo DevTools to launch the app on your device.
+   - Use an Android or iOS emulator to test the app.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Future Enhancements
 
-## Get a fresh project
+- Implement advanced post filtering.
+- Add support for direct messaging between users.
+- Enhance media handling with galleries and cropping tools.
+- Integrate analytics to track user engagement.
 
-When you're ready, run:
+---
 
-```bash
-npm run reset-project
-```
+## Contributing
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Contributions are welcome! If you want to contribute to Shuriken, follow these steps:
 
-## Learn more
+1. Fork the repository.
+2. Create a new branch for your feature:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. Commit your changes and push the branch:
+   ```bash
+   git push origin feature-name
+   ```
+4. Open a pull request.
 
-To learn more about developing your project with Expo, look at the following resources:
+---
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## License
 
-## Join the community
+This project is licensed under the MIT License. See the LICENSE file for details.
 
-Join our community of developers creating universal apps.
+---
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Contact
+
+For inquiries or feedback, reach out at [whisperer.meta@gmail.com].

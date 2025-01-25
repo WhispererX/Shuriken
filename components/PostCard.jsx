@@ -12,6 +12,7 @@ import { downloadFile, getSupabaseFileUrl } from '../services/imageService'
 import { Video } from 'expo-av'
 import { removePostLike, createPostLike } from '../services/postService'
 import Loading from './Loading'
+import { FontDisplay } from 'expo-font'
 
 
 const PostCard = ({
@@ -20,6 +21,9 @@ const PostCard = ({
     router,
     hasShadow = true,
     showMoreIcon = true,
+    showDelete= false,
+    onDelete = ()=>{},
+    onEdit = ()=>{},
 }) => {
     const shadowStyles = {
         shadowOffset: {width: 0, height: 2},
@@ -78,6 +82,20 @@ const PostCard = ({
         if(!showMoreIcon) return null;
         router.push({pathname: 'postDetails', params: {postId: item?.id}});
     }
+
+    const handlePostDelete = () => {
+        Alert.alert('Delete Post', 'Are you sure you want to delete this post?', [
+            {
+                text: 'Cancel',
+                style: 'cancel'
+            },
+            {
+                text: 'Delete',
+                onPress: () => onDelete(item),
+                style: 'destructive'
+            }
+        ])
+    }
   return (
     <View style={[styles.container, hasShadow && shadowStyles]}>
       <View style={styles.header}>
@@ -93,6 +111,18 @@ const PostCard = ({
                 <TouchableOpacity onPress={openPostDetails}>
                     <Icon name="threeDotsHorizontal" size={getHeightPercentage(3.4)} strokeWidth={3} color={theme.colors.text} />
                 </TouchableOpacity>
+            )
+        }
+        {
+            showDelete && currentUser.id == item?.userId && (
+                <View style={styles.actions}>
+                    <TouchableOpacity onPress={() => onEdit(item)}>
+                        <Icon name="edit" size={getHeightPercentage(2.5)} color={theme.colors.text} />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handlePostDelete}>
+                        <Icon name="delete" size={getHeightPercentage(2.5)} color={theme.colors.rose} />
+                    </TouchableOpacity>
+                </View>
             )
         }
 
@@ -194,10 +224,22 @@ const styles = StyleSheet.create({
         li: textStyles,
         h1: {
             color: theme.colors.dark,
+            fontSize: getHeightPercentage(3),
         },
         h4: {
             color: theme.colors.dark,
-        }
+            fontSize: getHeightPercentage(2.2),
+        },
+        blockquote: {
+            borderLeftWidth: 4,
+            borderLeftColor: theme.colors.gray,
+            paddingLeft: 10,
+            ...textStyles
+        },
+        code: {
+            backgroundColor: theme.colors.gray,
+            ...textStyles
+        },
     },
     header: {
         flexDirection: 'row',

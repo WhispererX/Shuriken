@@ -19,13 +19,13 @@ const RichTextEditor = forwardRef(({ onChange }, ref) => {
             actions.alignCenter,
             actions.alignRight,
             actions.code,
-            actions.line,
             actions.heading1,
             actions.heading4,
+            actions.insertLink,
         ]}
         iconMap={{
             [actions.heading1]: ({tintColor})=> <Text style={{color: tintColor}}>H1</Text>,
-            [actions.heading4]: ({tintColor})=> <Text style={{color: tintColor}}>H4</Text>
+            [actions.heading4]: ({tintColor})=> <Text style={{color: tintColor}}>H4</Text>,
         }}
         style={styles.richBar}
         flatContainerStyle={styles.flatStyle}

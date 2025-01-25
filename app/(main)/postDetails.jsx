@@ -1,7 +1,7 @@
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { useLocalSearchParams, useRouter } from 'expo-router'
-import { createComment, fetchPostDetails, removeComment } from '../../services/postService';
+import { createComment, fetchPostDetails, removeComment, removePost } from '../../services/postService';
 import { getHeightPercentage, getWidthPercentage } from '../../helpers/common';
 import { theme } from '../../constants/theme';
 import PostCard from '../../components/PostCard';
@@ -96,6 +96,20 @@ const PostDetails = () => {
         }
     }
 
+    const onDeletePost = async(item) => {
+        let res = await removePost(post.id);
+        if (res.success) {
+            router.back();
+        } else {
+            Alert.alert('Post', res.msg);
+        }
+    }
+
+    const onEditPost = async(item) => {
+        router.back();
+        router.push({pathname: 'newPost', params: {...item}});
+    }
+
     if (startLoading) {
         return (
             <View style={styles.center}>
@@ -117,6 +131,9 @@ const PostDetails = () => {
                 router={router}
                 hasShadow={false}
                 showMoreIcon={false}
+                showDelete={true}
+                onDelete={onDeletePost}
+                onEdit={onEditPost}
             />
 
             {/* comments */}

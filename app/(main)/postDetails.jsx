@@ -12,9 +12,10 @@ import Icon from '../../assets/icons';
 import CommentItem from '../../components/CommentItem';
 import { supabase } from '../../lib/superbase';
 import { getUserData } from '../../services/userService';
+import { createNotification } from '../../services/notificationService';
 
 const PostDetails = () => {
-    const {postId} = useLocalSearchParams();
+    const {postId, commendId} = useLocalSearchParams();
     const [post, setPost] = useState(null);
     const [startLoading, setStartLoading] = useState(true);
     const [loading, setLoading] = useState(false);
@@ -73,6 +74,19 @@ const PostDetails = () => {
         setLoading(true);
         let res = await createComment(data);
         if (res.success) {
+            if (user.id != post.userId) {
+                // Send notification
+                let notify = {
+                    senderId: user?.id,
+                    receiverId: post?.userId,
+                    title: 'commented on your post',
+                    data: JSON.stringify({
+                        postId: postId,
+                        commentId: res.data?.id
+                    })
+                }
+                createNotification(notify);
+            }
             commentRef.current = "";
             inputRef?.current?.clear();
         } else {
@@ -165,6 +179,7 @@ const PostDetails = () => {
                             key={comment?.id.toString()}
                             item={comment}
                             onDelete={onDeleteComment}
+                            highlight={comment.id == commendId}
                             canDelete={user?.id == comment?.user?.id || user?.id == post?.user?.id}
                         />
                     )
@@ -186,7 +201,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
-        paddingVertical: getWidthPercentage(7),
+        paddingVertical: getWidthPercentage(14),
     },
 
     inputContainer: {

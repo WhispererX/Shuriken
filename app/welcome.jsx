@@ -15,7 +15,7 @@ const Welcome = () => {
       <View style={styles.container}>
 
         {/* Welcome Image*/}
-        <Image source={require('../assets/images/shuriken.gif')} resizeMode='contain' style={styles.welcomeImage}/>
+        <Image source={require('../assets/images/shuriken.png')} resizeMode='contain' style={styles.welcomeImage}/>
 
         {/* Welcome Title*/}
         <View style={{gap: 20}}>

@@ -72,12 +72,13 @@ const PostCard = ({
         let content = {message: stripHtmlTags(item?.body)};
         if (item?.file) {
             setLoading(true);
-            let uri = await downloadFile(getSupabaseFileUrl(item?.file));
+            let uri = await downloadFile(getSupabaseFileUrl(item?.file).uri);
             setLoading(false);
             content.url = uri;
         }
         Share.share(content);
     }
+    
     const openPostDetails = () => {
         if(!showMoreIcon) return null;
         router.push({pathname: 'postDetails', params: {postId: item?.id}});

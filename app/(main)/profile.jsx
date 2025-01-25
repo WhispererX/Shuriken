@@ -183,13 +183,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
+    justifyContent: 'center'
   },
 
   infoText: {
     fontSize: getHeightPercentage(1.6),
     fontWeight: '500',
-    color: theme.colors.textLight,
-    //textAlign: 'center'
+    color: theme.colors.text,
+    textAlign: 'center',
   },
 
   logoutButton: {

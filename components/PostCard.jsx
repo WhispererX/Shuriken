@@ -10,7 +10,7 @@ import HTMLView from 'react-native-htmlview';
 import { Image } from 'expo-image'
 import { downloadFile, getSupabaseFileUrl } from '../services/imageService'
 import { Video } from 'expo-av'
-import { removePostLike } from '../services/postService'
+import { removePostLike, createPostLike } from '../services/postService'
 import Loading from './Loading'
 
 
